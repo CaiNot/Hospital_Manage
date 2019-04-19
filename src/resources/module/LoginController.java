@@ -16,6 +16,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import resources.DataBaseCon;
+import resources.Doctor;
+import resources.Patient;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -47,6 +49,13 @@ public class LoginController {
     private String table = "t_brxx";
     private String sqlBR, user, psd, path, title;
     private String userNum;
+    private Patient patient;
+    private Doctor doctor;
+
+    public LoginController() {
+        patient = new Patient();
+        doctor = new Doctor();
+    }
 
     @FXML
     private void handleLoginBtn(ActionEvent event) throws Exception {
@@ -56,8 +65,8 @@ public class LoginController {
         psd = passwdIn.getText().trim();
         path = "../view/registered.fxml";
         title = "病人挂号";
-
-        if (isDoctor.isSelected()) {
+        boolean isDoctorValue;
+        if ((isDoctorValue = isDoctor.isSelected())) {
             table = "t_ksys";
             path = "../view/DoctorView.fxml";
             title = "医生";
@@ -69,9 +78,21 @@ public class LoginController {
         Double money = 0.0;
         Date date;
         if (res.next()) {
-            name = res.getString("BRMC");
-            money = res.getBigDecimal("YCJE").doubleValue();
-            date = res.getDate("DLRQ");
+            if (isDoctorValue) {
+                doctor.user = user;
+                doctor.psd = psd;
+                doctor.department = res.getString("KSBH");
+                doctor.name = res.getString("YSMC");
+                doctor.pingyin = res.getString("PYZS");
+                doctor.isPro = res.getBoolean("SFZJ");
+                doctor.datetime = res.getDate("DLRQ");
+            } else {
+                patient.name = res.getString("BRMC");
+                patient.user = user;
+                patient.psd = psd;
+                patient.money = res.getBigDecimal("YCJE");
+                patient.datetime = res.getDate("DLRQ");
+            }
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
