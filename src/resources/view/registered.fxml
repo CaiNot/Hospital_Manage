@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -10,77 +12,108 @@
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
-            <Label layoutX="237.0" layoutY="16.0" prefHeight="28.0" prefWidth="124.0" text="门 诊 挂 号" textFill="#5c0a41">
-               <font>
-                  <Font name="Arial" size="24.0" />
-               </font>
-            </Label>
+            <GridPane layoutX="237.0" layoutY="16.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label layoutX="237.0" layoutY="16.0" text="门 诊 挂 号" textFill="#5c0a41" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Arial" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
-            <Label layoutX="64.0" layoutY="81.0" text="号种类别">
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Label>
-            <TextField layoutX="128.0" layoutY="78.0" />
-            <Label layoutX="321.0" layoutY="81.0" text="号种名称">
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Label>
-            <TextField layoutX="385.0" layoutY="77.0" />
-            <Label layoutX="322.0" layoutY="128.0" text="应缴金额">
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Label>
-            <TextField layoutX="386.0" layoutY="124.0" />
-            <Label layoutX="64.0" layoutY="128.0" text="交款金额">
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Label>
-            <TextField layoutX="129.0" layoutY="124.0" />
-            <TextField layoutX="129.0" layoutY="165.0" />
-            <Label layoutX="64.0" layoutY="169.0" text="找零金额">
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Label>
-            <Label layoutX="321.0" layoutY="169.0" text="挂号号码">
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Label>
-            <TextField layoutX="386.0" layoutY="165.0" />
-            <Label layoutX="66.0" layoutY="36.0" text="科室名称">
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Label>
-            <TextField layoutX="129.0" layoutY="33.0" />
-            <Label layoutX="322.0" layoutY="36.0" text="医生姓名">
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Label>
-            <TextField layoutX="385.0" layoutY="33.0" />
-            <Button layoutX="176.0" layoutY="249.0" mnemonicParsing="false" onAction="#handleOKBtn" text="确定">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button layoutX="272.0" layoutY="249.0" mnemonicParsing="false" onAction="#handleClrBtn" text="清除">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button layoutX="365.0" layoutY="249.0" mnemonicParsing="false" onAction="#handleQuitBtn" text="退出">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Button>
+            <GridPane layoutX="64.0" layoutY="33.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label layoutX="64.0" layoutY="128.0" text="交款金额" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <JFXComboBox fx:id="departmentBox" editable="true" layoutX="148.0" layoutY="33.0" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </JFXComboBox>
+                  <TextField editable="false" layoutX="129.0" layoutY="165.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button layoutX="272.0" layoutY="249.0" mnemonicParsing="false" onAction="#handleClrBtn" text="清除" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <TextField editable="false" layoutX="386.0" layoutY="165.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <TextField editable="false" layoutX="386.0" layoutY="124.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <Label layoutX="66.0" layoutY="36.0" text="科室名称">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="321.0" layoutY="81.0" text="号种名称" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="64.0" layoutY="169.0" text="找零金额" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="322.0" layoutY="36.0" text="医生姓名" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="322.0" layoutY="128.0" text="应缴金额" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="129.0" layoutY="124.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label layoutX="321.0" layoutY="169.0" text="挂号号码" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="176.0" layoutY="249.0" mnemonicParsing="false" onAction="#handleOKBtn" text="确定" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="64.0" layoutY="81.0" text="号种类别" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="365.0" layoutY="249.0" mnemonicParsing="false" onAction="#handleQuitBtn" text="退出" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <JFXComboBox fx:id="doctorNameBox" editable="true" layoutX="86.0" layoutY="29.0" GridPane.columnIndex="3" />
+                  <JFXComboBox fx:id="isProBox" editable="true" layoutX="382.0" layoutY="29.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXTextField fx:id="kindText" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
          </children></AnchorPane>
   </items>
 </SplitPane>

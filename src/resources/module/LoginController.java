@@ -68,6 +68,7 @@ public class LoginController {
         boolean isDoctorValue;
         if ((isDoctorValue = isDoctor.isSelected())) {
             table = "t_ksys";
+            userNum = "YSBH";
             path = "../view/DoctorView.fxml";
             title = "医生";
         }
@@ -75,32 +76,24 @@ public class LoginController {
                 user + "'AND DLKL='" + psd + "';";
         ResultSet res = dataBaseCon.statement.executeQuery(sqlBR);
         String name = "";
-        Double money = 0.0;
-        Date date;
         if (res.next()) {
             if (isDoctorValue) {
-                doctor.user = user;
-                doctor.psd = psd;
-                doctor.department = res.getString("KSBH");
-                doctor.name = res.getString("YSMC");
-                doctor.pingyin = res.getString("PYZS");
-                doctor.isPro = res.getBoolean("SFZJ");
-                doctor.datetime = res.getDate("DLRQ");
+                doctor.setData(res);
             } else {
-                patient.name = res.getString("BRMC");
-                patient.user = user;
-                patient.psd = psd;
-                patient.money = res.getBigDecimal("YCJE");
-                patient.datetime = res.getDate("DLRQ");
+                patient.setDate(res);
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setContentText("Wrong!");
             alert.showAndWait();
+            return;
         }
         System.out.println(name);
-        Parent root = FXMLLoader.load(getClass().getResource(path));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+
+        Parent root = loader.load();
+
         Scene sceneRegister = new Scene(root);
         Stage stage = new Stage();
         stage.setTitle(title);
@@ -108,22 +101,20 @@ public class LoginController {
         stage.show();
 
         Stage curStage = (Stage) loginBtn.getScene().getWindow();
+        dataBaseCon.close();
         curStage.close();
     }
 
     @FXML
     private void handleQuitBtn(ActionEvent event) {
+        dataBaseCon.close();
         Platform.exit();
     }
 
     @FXML
     void initialize() {
-        String Url = "jdbc:mysql://localhost:3306/hospital";//参数参考MySql连接数据库常用参数及代码示例
-        String name = "cai";//数据库用户名
-        String psd = "cai";//数据库密码
-
         dataBaseCon = new DataBaseCon();
-        if (dataBaseCon.connect(Url, name, psd)) {
+        if (dataBaseCon.connect()) {
             System.out.println("Yes");
         } else {
             System.out.println("No");

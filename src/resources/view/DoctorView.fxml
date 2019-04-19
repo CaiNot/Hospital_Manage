@@ -39,7 +39,14 @@
                             <content>
                                 <AnchorPane>
                            <children>
-                              <JFXListView layoutX="65.0" layoutY="-85.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <TableView fx:id="patienTable" layoutX="137.0" layoutY="65.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="挂号编号" />
+                                  <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="病人名称" />
+                                    <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="挂号日期" />
+                                    <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="号种类别" />
+                                </columns>
+                              </TableView>
                            </children></AnchorPane>
                             </content>
                         </Tab>
@@ -59,14 +66,13 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <DatePicker layoutX="26.0" layoutY="56.0" prefHeight="30.0" prefWidth="138.0" GridPane.halignment="CENTER" />
+                                    <DatePicker fx:id="startDate" layoutX="26.0" layoutY="56.0" prefHeight="30.0" prefWidth="138.0" GridPane.halignment="CENTER" />
                                     <ComboBox fx:id="startH" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </ComboBox>
-                                    <JFXListView prefHeight="222.0" prefWidth="640.0" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2" />
-                                    <DatePicker layoutX="83.0" layoutY="27.0" prefHeight="30.0" prefWidth="138.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                    <DatePicker fx:id="endDate" layoutX="83.0" layoutY="27.0" prefHeight="30.0" prefWidth="138.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                                     <Label text="起始时间">
                                        <GridPane.margin>
                                           <Insets left="30.0" />
@@ -110,6 +116,16 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
+                                    <TableView fx:id="doctorTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="科室名称" />
+                                        <TableColumn prefWidth="75.0" text="医生编号" />
+                                          <TableColumn prefWidth="75.0" text="医生名称" />
+                                          <TableColumn prefWidth="75.0" text="号种类别" />
+                                          <TableColumn prefWidth="75.0" text="挂号人次" />
+                                          <TableColumn prefWidth="75.0" text="收入合计" />
+                                      </columns>
+                                    </TableView>
                                  </children>
                               </GridPane>
                                     </children>

@@ -1110,88 +1110,109 @@
     <table id="278" parent="2" name="t_brxx">
       <Collation>utf8_general_ci</Collation>
     </table>
-    <table id="279" parent="2" name="t_ksys">
+    <table id="279" parent="2" name="t_ksxx">
       <Collation>utf8_general_ci</Collation>
     </table>
-    <column id="280" parent="277" name="name">
+    <table id="280" parent="2" name="t_ksys">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <column id="281" parent="277" name="name">
       <Position>1</Position>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="281" parent="277" name="age">
+    <column id="282" parent="277" name="age">
       <Position>2</Position>
       <DataType>int(4)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="282" parent="278" name="BRBH">
+    <column id="283" parent="278" name="BRBH">
       <Position>1</Position>
       <DataType>char(6)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="283" parent="278" name="BRMC">
+    <column id="284" parent="278" name="BRMC">
       <Position>2</Position>
       <DataType>char(10)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="284" parent="278" name="DLKL">
+    <column id="285" parent="278" name="DLKL">
       <Position>3</Position>
       <DataType>char(8)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="285" parent="278" name="YCJE">
+    <column id="286" parent="278" name="YCJE">
       <Position>4</Position>
       <DataType>decimal(10,2 digit)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="286" parent="278" name="DLRQ">
+    <column id="287" parent="278" name="DLRQ">
       <Position>5</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="287" parent="279" name="YSBH">
+    <column id="288" parent="279" name="KSBH">
       <Position>1</Position>
       <DataType>char(6)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="288" parent="279" name="KSBH">
+    <column id="289" parent="279" name="KSMC">
       <Position>2</Position>
-      <DataType>char(6)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="289" parent="279" name="YSMC">
-      <Position>3</Position>
       <DataType>char(10)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="290" parent="279" name="PYZS">
+      <Position>3</Position>
+      <DataType>char(8)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="291" parent="280" name="YSBH">
+      <Position>1</Position>
+      <DataType>char(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="292" parent="280" name="KSBH">
+      <Position>2</Position>
+      <DataType>char(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="293" parent="280" name="YSMC">
+      <Position>3</Position>
+      <DataType>char(10)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="294" parent="280" name="PYZS">
       <Position>4</Position>
       <DataType>char(4)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="291" parent="279" name="DLKL">
+    <column id="295" parent="280" name="DLKL">
       <Position>5</Position>
       <DataType>char(8)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="292" parent="279" name="SFZJ">
+    <column id="296" parent="280" name="SFZJ">
       <Position>6</Position>
       <DataType>tinyint(4)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="293" parent="279" name="DLRQ">
+    <column id="297" parent="280" name="DLRQ">
       <Position>7</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>

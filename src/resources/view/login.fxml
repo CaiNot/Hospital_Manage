@@ -38,7 +38,7 @@
                   <Font name="Calibri Italic" size="49.0" />
                </font>
             </Label>
-            <PasswordField fx:id="passwdIn" prefHeight="30.0" prefWidth="287.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <PasswordField fx:id="passwdIn" prefHeight="30.0" prefWidth="287.0" text="this_is_" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="30.0" />
                </GridPane.margin>
@@ -53,7 +53,7 @@
                   <Font name="Calibri" size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="userIn" prefHeight="30.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+            <TextField fx:id="userIn" prefHeight="30.0" prefWidth="344.0" text="000001" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="30.0" />
                </GridPane.margin>
