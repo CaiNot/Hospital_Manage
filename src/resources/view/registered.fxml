@@ -55,14 +55,14 @@
                         <Insets />
                      </GridPane.margin>
                   </JFXComboBox>
-                  <TextField editable="false" layoutX="129.0" layoutY="165.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="chargeText" editable="false" layoutX="129.0" layoutY="165.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Button layoutX="272.0" layoutY="249.0" mnemonicParsing="false" onAction="#handleClrBtn" text="清除" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
                   <TextField editable="false" layoutX="386.0" layoutY="165.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                  <TextField editable="false" layoutX="386.0" layoutY="124.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <TextField fx:id="moneyAllText" editable="false" layoutX="386.0" layoutY="124.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                   <Label layoutX="66.0" layoutY="36.0" text="科室名称">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
@@ -88,7 +88,7 @@
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="129.0" layoutY="124.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="moneyInText" layoutX="129.0" layoutY="124.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label layoutX="321.0" layoutY="169.0" text="挂号号码" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
@@ -111,7 +111,7 @@
                   </Button>
                   <JFXComboBox fx:id="doctorNameBox" editable="true" layoutX="86.0" layoutY="29.0" GridPane.columnIndex="3" />
                   <JFXComboBox fx:id="isProBox" editable="true" layoutX="382.0" layoutY="29.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <JFXTextField fx:id="kindText" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <JFXComboBox fx:id="kindBox" editable="true" layoutX="83.0" layoutY="29.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children></AnchorPane>

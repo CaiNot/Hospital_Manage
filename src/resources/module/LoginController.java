@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import resources.Data;
 import resources.DataBaseCon;
 import resources.Doctor;
 import resources.Patient;
@@ -59,6 +60,7 @@ public class LoginController {
 
     @FXML
     private void handleLoginBtn(ActionEvent event) throws Exception {
+
         table = "t_brxx";
         userNum = "BRBH";
         user = userIn.getText().trim();
@@ -79,8 +81,10 @@ public class LoginController {
         if (res.next()) {
             if (isDoctorValue) {
                 doctor.setData(res);
+                Data.doctor = doctor;
             } else {
                 patient.setDate(res);
+                Data.patient = patient;
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -96,7 +100,7 @@ public class LoginController {
 
         Scene sceneRegister = new Scene(root);
         Stage stage = new Stage();
-        stage.setTitle(title);
+        stage.setTitle(userNum);
         stage.setScene(sceneRegister);
         stage.show();
 

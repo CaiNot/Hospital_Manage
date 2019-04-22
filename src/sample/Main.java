@@ -20,11 +20,6 @@ public class Main extends Application {
         primaryStage.setTitle("Login");
         primaryStage.setScene(new Scene(root, 500, 400));
         primaryStage.show();
-
-//        LoginController controller = loader.getController();
-
-
-//        controller.setDataBase(Url,name,psd);
     }
 
 
