@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resources.module.DoctorViewController">
     <children>
@@ -39,14 +30,7 @@
                             <content>
                                 <AnchorPane>
                            <children>
-                              <TableView fx:id="patienTable" layoutX="137.0" layoutY="65.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <columns>
-                                  <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="挂号编号" />
-                                  <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="病人名称" />
-                                    <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="挂号日期" />
-                                    <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="号种类别" />
-                                </columns>
-                              </TableView>
+                              <TableView fx:id="patientTable" layoutX="137.0" layoutY="65.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children></AnchorPane>
                             </content>
                         </Tab>

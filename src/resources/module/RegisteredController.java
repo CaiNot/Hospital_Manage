@@ -62,7 +62,6 @@ public class RegisteredController {
         //language=MySQL
         String sql = "";
 
-
         doctorID = doctorNameBox.getValue();
         HZBH = kindBox.getValue();
         departmentID = departmentBox.getValue();
