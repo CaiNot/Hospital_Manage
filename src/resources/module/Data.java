@@ -1,5 +1,4 @@
-package resources;
-
+package resources.module;
 
 public class Data {
     public static Patient patient;

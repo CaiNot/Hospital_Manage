@@ -1,31 +1,24 @@
-package resources.module;
+package resources.controller;
 
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-import resources.Data;
-import resources.DataBaseCon;
-import resources.Doctor;
-import resources.Patient;
+import resources.module.Data;
+import resources.module.DataBaseCon;
+import resources.module.Doctor;
+import resources.module.Patient;
 
-import java.math.BigDecimal;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class LoginController {
@@ -77,30 +70,31 @@ public class LoginController {
         sqlBR = "SELECT * FROM " + table + " WHERE " + userNum + "='" +
                 user + "'AND DLKL='" + psd + "';";
         ResultSet res = dataBaseCon.statement.executeQuery(sqlBR);
-        String name = "";
+        String name;
         if (res.next()) {
             if (isDoctorValue) {
                 doctor.setData(res);
                 Data.doctor = doctor;
+                name = doctor.user + "," + doctor.name;
             } else {
                 patient.setDate(res);
                 Data.patient = patient;
+                name = patient.user + "," + patient.name;
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
-            alert.setContentText("Wrong!");
+            alert.setContentText("Please Check Your Input UserId and PassWord!");
             alert.showAndWait();
             return;
         }
-        System.out.println(name);
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
 
         Parent root = loader.load();
 
         Scene sceneRegister = new Scene(root);
         Stage stage = new Stage();
-        stage.setTitle(userNum);
+        stage.setTitle(name);
         stage.setScene(sceneRegister);
         stage.show();
 

@@ -1,31 +1,27 @@
-package resources.module;
+package resources.controller;
 
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
-import javafx.application.Application;
+
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import resources.*;
+import resources.module.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class RegisteredController {
@@ -43,6 +39,9 @@ public class RegisteredController {
     private JFXComboBox<String> isProBox;
     @FXML
     private JFXComboBox<String> kindBox;
+    @FXML
+    private TextField lastText;
+    //language=MySQL
     private String sql;
     private ResultSet resultSet;
     private DataBaseCon dataBaseCon;
@@ -50,17 +49,20 @@ public class RegisteredController {
     private String departmentName, doctorName;
     private NumKind numKind = new NumKind();
     String userID, doctorID, departmentID;
+    ArrayList<String> departmentList = new ArrayList<>(), doctorList;
+    boolean ok = false;
+    @FXML
+    private TextField numText;
 
     @FXML
     private void handleOKBtn(ActionEvent event) throws Exception {
+        if (ok)
+            return;
         BigDecimal GHFY;
         String date;
         int GHRC;
         boolean THBZ;
         String GHBH, HZBH;
-
-        //language=MySQL
-        String sql = "";
 
         doctorID = doctorNameBox.getValue();
         HZBH = kindBox.getValue();
@@ -68,34 +70,57 @@ public class RegisteredController {
 
         String[] temp;
         temp = HZBH.split(",");
-        if (temp.length < 3)
+        if (temp.length < 3) {
+            this.warning();
             return;
+        }
         HZBH = temp[0];
         temp = doctorID.split(",");
         if (temp.length < 3) {
+            this.warning();
+            return;
+        }
+        if (chargeText.getText().isEmpty()) {
+            this.warning();
             return;
         }
         doctorID = temp[0];
         temp = departmentID.split(",");
-        if (temp.length < 3)
+        if (temp.length < 3) {
+            this.warning();
             return;
+        }
         sql = "SELECT count(HZBH) FROM t_ghxx WHERE BRBH='" + Data.patient.user + "' AND HZBH='" + HZBH + "';";
         resultSet = dataBaseCon.statement.executeQuery(sql);
         if (resultSet.next()) {
-            GHRC = resultSet.getInt(1)+1;
-        } else return;
+            GHRC = resultSet.getInt(1) + 1;
+        } else {
+            this.warning();
+            return;
+        }
+
+
         THBZ = true;
         GHFY = new BigDecimal(moneyAllText.getText());
         departmentID = temp[0];
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
         date = simpleDateFormat.format(new Date());
 
+
+        sql = "UPDATE t_brxx SET YCJE ='" + chargeText.getText() +
+                "' WHERE BRBH ='" + Data.patient.user + "';";
+        PreparedStatement psql = dataBaseCon.con.prepareStatement(sql);
+        psql.executeUpdate();
+
+        sql = "UPDATE t_hzxx SET GHRS=GHRS+1 WHERE HZBH='" + HZBH + "';";
+        psql = dataBaseCon.con.prepareStatement(sql);
+        psql.executeUpdate();
+
         sql = "SELECT max(GHBH) FROM t_ghxx;";
         resultSet = dataBaseCon.statement.executeQuery(sql);
         if (resultSet.next()) {
-            GHBH = String.valueOf(Integer.parseInt(resultSet.getString(1)) + 1);
-
-            PreparedStatement psql = dataBaseCon.con.prepareStatement("INSERT INTO T_GHXX(GHBH, HZBH, YSBH, BRBH, GHRC, THBZ, GHFY, RQSJ)" + "VALUES (?,?,?,?,?,?,?,?)");
+            GHBH = String.format("%06d",Integer.parseInt(resultSet.getString(1)) + 1);
+            psql = dataBaseCon.con.prepareStatement("INSERT INTO T_GHXX(GHBH, HZBH, YSBH, BRBH, GHRC, THBZ, GHFY, RQSJ)" + "VALUES (?,?,?,?,?,?,?,?)");
 
             psql.setString(1, GHBH);
             psql.setString(2, HZBH);
@@ -109,10 +134,15 @@ public class RegisteredController {
             psql.executeUpdate();
             psql.close();
             System.out.println("Inert OK!");
-            Stage curStage = (Stage) departmentBox.getScene().getWindow();
-            dataBaseCon.close();
-            curStage.close();
+
+            numText.setText(GHBH);
+            ok = true;
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("OK");
+            alert.setContentText("你的挂号号码为"+GHBH+"\n");
+            alert.showAndWait();
         }
+
     }
 
     @FXML
@@ -122,29 +152,44 @@ public class RegisteredController {
 
     @FXML
     private void handleQuitBtn(ActionEvent event) {
+        dataBaseCon.close();
         Platform.exit();
     }
 
+    BigDecimal allMoney;
+
+    private void warning() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setContentText("Wrong!");
+        alert.showAndWait();
+        return;
+    }
 
     @FXML
     void initialize() {
         dataBaseCon = new DataBaseCon();
-
         if (dataBaseCon.connect()) {
             System.out.println("DataBase Connected!");
         } else {
             System.out.println("DataBase Connect Error!");
         }
-        //language=MySQL
-        sql = "SELECT * FROM t_ksys;";
         doctor = new Doctor();
         Department department = new Department();
+        allMoney = new BigDecimal(0);
         try {
+            allMoney = Data.patient.money;
+            if (!moneyInText.getText().isEmpty())
+                chargeText.setText(String.valueOf(allMoney.doubleValue() - Double.parseDouble(moneyInText.getText())));
             sql = "SELECT * FROM t_ksxx;";
             resultSet = dataBaseCon.statement.executeQuery(sql);
             while (resultSet.next()) {
                 department.setData(resultSet);
                 departmentBox.getItems().add(department.num + "," + department.name + "," + department.pingyin);
+            }
+            resultSet.close();
+            for (String s : departmentBox.getItems()) {
+                departmentList.add(s);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -169,13 +214,15 @@ public class RegisteredController {
                 }
             }
         });
+        AutoCompleteComboBoxListener<String> autoCom = new AutoCompleteComboBoxListener<>(departmentBox);
 
         doctorNameBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+
                 String[] stringsDoctor = newValue.split(",");
                 String[] stringsDepart = departmentBox.getValue().split(",");
-                if (stringsDepart.length > 1 && stringsDoctor.length > 1) {
+                if (stringsDepart.length > 2 && stringsDoctor.length > 2) {
                     doctorName = stringsDoctor[1];
                     departmentName = stringsDepart[1];
                     sql = "SELECT SFZJ FROM t_ksys WHERE YSBH='" + stringsDoctor[0] + "';";
@@ -191,17 +238,7 @@ public class RegisteredController {
                             }
                             isProBox.getSelectionModel().selectFirst();
                         }
-                        sql = "SELECT * FROM t_hzxx WHERE KSBH='" +
-                                stringsDepart[0] + "' and SFZJ='" +
-                                String.valueOf(isProBox.getValue().compareTo("普通号") != 0) + "';";
-                        resultSet = dataBaseCon.statement.executeQuery(sql);
-                        kindBox.getItems().clear();
-                        while (resultSet.next()) {
-                            numKind.setData(resultSet);
-                            kindBox.getItems().add(numKind.id + "," + numKind.name
-                                    + "," + numKind.pingyin);
-                        }
-                        kindBox.getSelectionModel().selectFirst();
+                        resultSet.close();
                     } catch (SQLException e) {
                         e.printStackTrace();
                         return;
@@ -210,22 +247,37 @@ public class RegisteredController {
             }
         });
 
-//        isProBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-//            @Override
-//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//                if (newValue == null)
-//                    return;
-//                String[] stringsDoctor = doctorNameBox.getValue().split(",");
-//                String[] stringsDepart = departmentBox.getValue().split(",");
-//                if (stringsDepart.length > 1 && stringsDoctor.length > 1) {
-//                    doctorName = stringsDoctor[1];
-//                    departmentName = stringsDepart[1];
-//                    if (newValue.length() > 2) {
-//                        kindText.setText(departmentName + "," + doctorName + "," + newValue);
-//                    }
-//                }
-//            }
-//        });
+        isProBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue == null)
+                    return;
+                String[] stringsDoctor = doctorNameBox.getValue().split(",");
+                String[] stringsDepart = departmentBox.getValue().split(",");
+                if (stringsDepart.length > 2 && stringsDoctor.length > 2) {
+                    departmentName = stringsDepart[1];
+                    try {
+                        sql = "SELECT * FROM t_hzxx WHERE KSBH='" +
+                                stringsDepart[0] + "' and SFZJ='" +
+                                (newValue.compareTo("普通号") != 0 ? "1" : "0") + "';";
+                        System.out.println(sql);
+                        resultSet = dataBaseCon.con.createStatement().executeQuery(sql);
+                        kindBox.getItems().clear();
+                        while (resultSet.next()) {
+                            numKind.setData(resultSet);
+                            kindBox.getItems().add(numKind.id + "," + numKind.name
+                                    + "," + numKind.pingyin);
+                        }
+                        resultSet.close();
+                        kindBox.getSelectionModel().selectFirst();
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        kindBox.getSelectionModel().selectFirst();
+                    }
+                }
+            }
+        });
         kindBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -239,6 +291,8 @@ public class RegisteredController {
                             numKind.setData(resultSet);
                         }
                         moneyAllText.setText(numKind.money.toString());
+                        resultSet.close();
+
                     } catch (SQLException e) {
                         e.printStackTrace();
                         return;
@@ -253,17 +307,18 @@ public class RegisteredController {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 BigDecimal money = new BigDecimal(newValue);
                 if (Data.patient.money.compareTo(money) > 0) {
-                    moneyInText.setEditable(false);
-//                    chargeText.set(false);
+                    moneyInText.setDisable(true);
                 } else {
-                    moneyInText.setEditable(true);
+                    moneyInText.setDisable(false);
                 }
+                lastText.setText(Data.patient.money.toString());
+                chargeText.setText(Data.patient.money.subtract(money).toString());
             }
         });
         moneyInText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                double moneyIn, moneyAll;
+                double moneyIn = 0, moneyAll;
                 try {
                     moneyIn = Double.parseDouble(newValue);
                 } catch (Exception e) {
@@ -271,7 +326,7 @@ public class RegisteredController {
                     return;
                 }
                 moneyAll = Double.parseDouble(moneyAllText.getText());
-                chargeText.setText(String.valueOf(moneyIn - moneyAll));
+                chargeText.setText(String.valueOf(moneyIn + allMoney.doubleValue() - moneyAll));
             }
         });
 
@@ -280,7 +335,6 @@ public class RegisteredController {
         this.onMouseEnterd(departmentBox);
         this.onMouseEnterd(doctorNameBox);
         this.onMouseEnterd(isProBox);
-
     }
 
     private void onMouseEnterd(JFXComboBox<String> comboBox) {

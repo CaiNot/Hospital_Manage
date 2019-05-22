@@ -1,4 +1,4 @@
-package sample;
+package resources;
 
 
 import javafx.application.Application;
@@ -6,10 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import resources.DataBaseCon;
-import resources.module.LoginController;
-
-import java.sql.SQLException;
 
 public class Main extends Application {
 

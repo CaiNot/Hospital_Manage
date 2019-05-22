@@ -1,4 +1,4 @@
-package resources;
+package resources.module;
 
 import javafx.beans.property.SimpleStringProperty;
 

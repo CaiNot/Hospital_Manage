@@ -1,4 +1,4 @@
-package resources;
+package resources.module;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,4 +1,4 @@
-package resources;
+package resources.module;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;

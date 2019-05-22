@@ -1,4 +1,4 @@
-package resources;
+package resources.module;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.15829145728643215" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resources.module.RegisteredController">
+<SplitPane dividerPositions="0.15829145728643215" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="resources.controller.RegisteredController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
@@ -61,7 +61,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
-                  <TextField editable="false" layoutX="386.0" layoutY="165.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <TextField fx:id="numText" editable="false" layoutX="386.0" layoutY="165.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                   <TextField fx:id="moneyAllText" editable="false" layoutX="386.0" layoutY="124.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                   <Label layoutX="66.0" layoutY="36.0" text="科室名称">
                      <font>
@@ -112,6 +112,16 @@
                   <JFXComboBox fx:id="doctorNameBox" editable="true" layoutX="86.0" layoutY="29.0" GridPane.columnIndex="3" />
                   <JFXComboBox fx:id="isProBox" editable="true" layoutX="382.0" layoutY="29.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <JFXComboBox fx:id="kindBox" editable="true" layoutX="83.0" layoutY="29.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Label layoutX="10.0" layoutY="234.0" prefHeight="17.0" prefWidth="50.0" text="余额" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Microsoft JhengHei" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="lastText" editable="false" layoutX="83.0" layoutY="227.0" prefHeight="30.0" prefWidth="101.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets right="100.0" />
+                     </GridPane.margin>
+                  </TextField>
                </children>
             </GridPane>
          </children></AnchorPane>
